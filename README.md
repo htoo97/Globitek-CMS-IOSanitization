@@ -1,6 +1,6 @@
 # Project 2 - Input/Output Sanitization
 
-Time spent: **14** hours spent in total
+Time spent: **17** hours spent in total
 
 ## User Stories
 
@@ -69,7 +69,7 @@ The following advanced user stories are optional:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/s2KcHOM.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
