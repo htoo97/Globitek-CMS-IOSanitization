@@ -14,6 +14,9 @@ if (db_num_rows($state_result) === 0) {
   redirect_to('index.php');
 }
 
+$country_result = find_country_by_id($state['country_id']);
+$country = db_fetch_assoc($country_result);
+
 ?>
 
 <?php $page_title = 'Staff: State of ' . $state['name']; ?>
@@ -21,6 +24,7 @@ if (db_num_rows($state_result) === 0) {
 
 <div id="main-content">
   <a href="index.php">Back to States List</a><br />
+  <a href="../countries/show.php?id=<?php echo $country['id']; ?>">Back to Country: <?php echo $country['name']; ?></a><br />
 
   <h1>State: <?php echo $state['name']; ?></h1>
 
