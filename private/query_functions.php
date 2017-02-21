@@ -572,8 +572,8 @@
     if (is_blank($user['username'])) {
       $errors[] = "Username cannot be blank.";
     }
-    elseif (!has_length($user['username'], array('max' => 255))) {
-      $errors[] = "Username must be less than 255 characters.";
+    elseif (!has_length($user['username'], array('min' => 2, 'max' => 255))) {
+      $errors[] = "Username must be between 2 and 255 characters.";
     }
     else if (preg_match('/\A[A-Za-z0-9_]+\Z/', $user['username']) == 0) {
       $errors[] = "Username must contain only the whitelisted characters: A-Z, a-z, 0-9, and _.";
