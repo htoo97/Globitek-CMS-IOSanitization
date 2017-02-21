@@ -448,7 +448,7 @@
       $errors[] = "First name must be between 2 and 255 characters.";
     }
     // My Custom Validation
-    elseif (preg_match('/\A[A-Za-z\s\-,\.\']+\Z/', $users['first_name']) == 0) {
+    elseif (preg_match('/\A[A-Za-z\s\-,\.\']+\Z/', $user['first_name']) == 0) {
         $errors[] = "First name has invalid characters. Only letters, spaces, and symbols (-,.') are allowed.";
     }
 
@@ -458,7 +458,7 @@
       $errors[] = "Last name must be between 2 and 255 characters.";
     }
     // My Custom Validation
-    elseif (preg_match('/\A[A-Za-z\s\-,\.\']+\Z/', $users['last_name']) == 0) {
+    elseif (preg_match('/\A[A-Za-z\s\-,\.\']+\Z/', $user['last_name']) == 0) {
         $errors[] = "Last name has invalid characters. Only letters, spaces, and symbols (-,.') are allowed.";
     }
 
@@ -468,9 +468,11 @@
     elseif (!has_valid_email_format($user['email'])) {
       $errors[] = "Email must be a valid format.";
     }
-    else if (preg_match('/\A[A-Za-z0-9_@\.\-]+\Z/', $users['email']) == 0) {
+    else if (preg_match('/\A[A-Za-z0-9_@\.\-]+\Z/', $user['email']) == 0) {
       $errors[] = "Email must contain only the whitelisted characters: A-Z, a-z, 0-9, and @._-.";
     }
+
+    $duplicate_result = search_duplicate_usernames($user['username']);
 
     if (is_blank($user['username'])) {
       $errors[] = "Username cannot be blank.";
@@ -478,9 +480,27 @@
     elseif (!has_length($user['username'], array('max' => 255))) {
       $errors[] = "Username must be less than 255 characters.";
     }
-    else if (preg_match('/\A[A-Za-z0-9_]+\Z/', $users['username']) == 0) {
+    else if (preg_match('/\A[A-Za-z0-9_]+\Z/', $user['username']) == 0) {
       $errors[] = "Username must contain only the whitelisted characters: A-Z, a-z, 0-9, and _.";
     }
+    // Optional Feature 2: uniqueness of username check
+    // edit.php: user id already exists
+    else if (array_key_exists('id', $user)) {
+      while ($duplicate = db_fetch_assoc($duplicate_result)) {
+        if ( (int)$user['id'] != (int)$duplicate['id'] ) {
+          $errors[] = "Username already exists. Choose another.";
+        }
+      }
+    }
+    // new.php: user id doesn't exist
+    else if (!array_key_exists('id', $user)) {
+      if (db_num_rows($duplicate_result) > 0) {
+        $errors[] = "Username already exists. Choose another.";
+      }
+    }
+
+    db_free_result($duplicate_result);
+
 
     return $errors;
   }
@@ -503,13 +523,14 @@
     $sql .= "'" . db_escape($db, $user['last_name']) . "',";
     $sql .= "'" . db_escape($db, $user['email']) . "',";
     $sql .= "'" . db_escape($db, $user['username']) . "',";
-    $sql .= "'" . $created_at . "',";
+    $sql .= "'" . $created_at . "'";
     $sql .= ");";
     // For INSERT statments, $result is just true/false
     $result = db_query($db, $sql);
     if($result) {
       return true;
-    } else {
+    }
+    else {
       // The SQL INSERT statement failed.
       // Just show the error, not the form
       echo db_error($db);
@@ -546,6 +567,16 @@
       db_close($db);
       exit;
     }
+  }
+
+  // search for duplicate usernames
+  function search_duplicate_usernames($username) {
+    global $db;
+
+    $sql = "SELECT * from users ";
+    $sql .= "WHERE username LIKE '" .  $username . "';";
+    $duplicate_result = db_query($db, $sql);
+    return $duplicate_result;
   }
 
 ?>
