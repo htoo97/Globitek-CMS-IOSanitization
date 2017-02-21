@@ -37,8 +37,8 @@
     if (is_blank($country['code'])) {
       $errors[] = "Country code cannot be blank.";
     }
-    else if (!has_length($country['code'], 2)) {
-      $errors[] = "Country name must be between 2 characters.";
+    else if (!has_length($country['code'], array('min' => 2, 'max' => 2)) {
+      $errors[] = "Country name must be 2 characters.";
     }
     // My Custom Validation
     else if (preg_match('/\A[A-Z]+\Z/', $country['code']) == 0) {
@@ -154,8 +154,8 @@
     if (is_blank($state['code'])) {
       $errors[] = "State code cannot be blank.";
     }
-    else if (!has_length($state['code'], 2)) {
-      $errors[] = "State name must be between 2 characters.";
+    else if (!has_length($state['code'], array('min' => 2, 'max' => 2))) {
+      $errors[] = "State name must be 2 characters.";
     }
     // My Custom Validation
     else if (preg_match('/\A[A-Z]+\Z/', $state['code']) == 0) {
