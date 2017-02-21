@@ -37,7 +37,7 @@
     if (is_blank($country['code'])) {
       $errors[] = "Country code cannot be blank.";
     }
-    else if (!has_length($country['code'], array('min' => 2, 'max' => 2)) {
+    else if (!has_length($country['code'], array('min' => 2, 'max' => 2))) {
       $errors[] = "Country name must be 2 characters.";
     }
     // My Custom Validation
