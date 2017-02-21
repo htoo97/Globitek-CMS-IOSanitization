@@ -75,7 +75,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+It took me quite a while to grasp the actual means of nesting a CMS within another while nesting the states inside the countries CMS, while ensuring that the old states functions are maintained and new functions that include countries CMS are integrated.
 
 ## License
 
