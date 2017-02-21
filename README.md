@@ -54,7 +54,7 @@ The following **required** functionality is completed:
 
 The following advanced user stories are optional:
 
-- [ ]  Bonus: On "public/staff/territories/show.php", display the name of the state.
+- [x]  Bonus: On "public/staff/territories/show.php", display the name of the state.
 
 - [ ]  Bonus: Validate the uniqueness of `users.username`.
 
