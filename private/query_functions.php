@@ -579,4 +579,15 @@
     return $duplicate_result;
   }
 
+  // delete user by ID
+  function delete_user($id=0) {
+    global $db;
+
+    $sql = "DELETE FROM users ";
+    $sql .= "WHERE id = " . db_escape($db, $id) . ";";
+
+    $delete_result = db_query($db, $sql);
+    return $delete_result;
+  }
+
 ?>
