@@ -50,7 +50,7 @@ The following **required** functionality is completed:
   * [x]  Required: Verify form inputs are not vulnerable to XSS attacks.
   * [x]  Required: Verify query strings are not vulnerable to XSS attacks.
   * [x]  Required: Listed other bugs or security vulnerabilities
-  * * I've tried different methods as far as I know to test for security vulnerabilities in the form inputs and URL query strings, but haven't found any to the extent of my knowledge. I whitelisted specific characters using `preg_match()` function of PHP, and redirected to index.php if an invalid query string was provided in the URL.
+   * I've tried different methods as far as I know to test for security vulnerabilities in the form inputs and URL query strings, but haven't found any to the extent of my knowledge. I whitelisted specific characters using `preg_match()` function of PHP, and redirected to index.php if an invalid query string was provided in the URL.
 
 The following advanced user stories are optional:
 
