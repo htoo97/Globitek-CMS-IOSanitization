@@ -58,7 +58,7 @@ The following advanced user stories are optional:
 
 - [x]  Bonus: Validate the uniqueness of `users.username`.
 
-- [ ]  Bonus: Add a page for "public/staff/users/delete.php".
+- [x]  Bonus: Add a page for "public/staff/users/delete.php".
 
 - [ ]  Bonus: Add a Staff CMS for countries.
 
