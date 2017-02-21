@@ -14,6 +14,9 @@ if (db_num_rows($territory_result) === 0) {
   redirect_to('index.php');
 }
 
+$state_result = find_state_by_id($territory['state_id']);
+$state = db_fetch_assoc($state_result);
+
 ?>
 
 <?php $page_title = 'Staff: Territory of ' . $territory['name']; ?>
@@ -32,8 +35,8 @@ if (db_num_rows($territory_result) === 0) {
     echo "<td>" . $territory['name'] . "</td>";
     echo "</tr>";
     echo "<tr>";
-    echo "<td>State ID: </td>";
-    echo "<td>" . $territory['state_id'] . "</td>";
+    echo "<td>State: </td>";
+    echo "<td>" . $state['name'] . "</td>";
     echo "</tr>";
     echo "<tr>";
     echo "<td>Position: </td>";
